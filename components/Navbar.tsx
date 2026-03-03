@@ -2,48 +2,50 @@
 
 import { Shield } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-    { label: "Beranda", href: "#" },
-    { label: "Top Perusahaan", href: "#top-perusahaan" },
-    { label: "Panduan", href: "#" },
-    { label: "FAQ", href: "#" },
+    { label: "Beranda", href: "/pelaporan" },
+    { label: "ADEK3", href: "/adek3" },
+    { label: "SORE", href: "/" },
 ];
 
 export default function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false);
+    const pathname = usePathname();
 
     return (
         <nav className="bg-white shadow-sm sticky top-0 z-50">
-            <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
                 {/* Logo */}
-                <a href="#" className="flex items-center gap-2">
-                    <div className="w-9 h-9 rounded-full bg-[#2F7E79] flex items-center justify-center">
-                        <Shield className="w-5 h-5 text-white" />
+                <Link href="/" className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-[#2F7E79] flex items-center justify-center">
+                        <Shield className="w-4 h-4 text-white" />
                     </div>
-                    <div className="flex flex-col leading-tight">
-                        <span className="font-bold text-lg text-[#2C3E50] tracking-wide">SORE</span>
-                        <span className="text-[10px] text-[#6B7280]">Safety Score Public</span>
-                    </div>
-                </a>
+                    <span className="font-bold text-base text-[#2C3E50] tracking-wide">
+                        DIPA KERJA
+                    </span>
+                </Link>
 
                 {/* Desktop Nav */}
-                <div className="hidden md:flex items-center gap-6">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.label}
-                            href={link.href}
-                            className="text-sm text-[#2C3E50] hover:text-[#2F7E79] transition-colors duration-200 font-medium"
-                        >
-                            {link.label}
-                        </a>
-                    ))}
-                    <a
-                        href="#"
-                        className="bg-[#2F7E79] text-white text-sm font-semibold px-6 py-2 rounded-full hover:opacity-90 transition-opacity duration-200"
-                    >
-                        Login
-                    </a>
+                <div className="hidden md:flex items-center gap-1">
+                    {navLinks.map((link) => {
+                        const isActive = pathname === link.href;
+                        return (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                className={`text-sm font-medium px-4 py-1.5 rounded-full transition-all duration-200
+                                    ${isActive
+                                        ? "text-[#2F7E79] bg-[#e8f4f3] font-semibold"
+                                        : "text-[#4B5563] hover:text-[#2F7E79] hover:bg-slate-50"
+                                    }`}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
 
                 {/* Mobile Hamburger */}
@@ -66,23 +68,24 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {menuOpen && (
-                <div className="md:hidden border-t border-[#E5E7EB] bg-white px-6 py-4 flex flex-col gap-4">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.label}
-                            href={link.href}
-                            className="text-sm text-[#2C3E50] hover:text-[#2F7E79] transition-colors duration-200 font-medium"
-                            onClick={() => setMenuOpen(false)}
-                        >
-                            {link.label}
-                        </a>
-                    ))}
-                    <a
-                        href="#"
-                        className="bg-[#2F7E79] text-white text-sm font-semibold px-6 py-2.5 rounded-full hover:opacity-90 transition-opacity duration-200 text-center"
-                    >
-                        Login
-                    </a>
+                <div className="md:hidden border-t border-[#E5E7EB] bg-white px-6 py-4 flex flex-col gap-2">
+                    {navLinks.map((link) => {
+                        const isActive = pathname === link.href;
+                        return (
+                            <Link
+                                key={link.label}
+                                href={link.href}
+                                className={`text-sm font-medium px-4 py-2 rounded-lg transition-colors duration-200
+                                    ${isActive
+                                        ? "text-[#2F7E79] bg-[#e8f4f3] font-semibold"
+                                        : "text-[#4B5563] hover:text-[#2F7E79] hover:bg-slate-50"
+                                    }`}
+                                onClick={() => setMenuOpen(false)}
+                            >
+                                {link.label}
+                            </Link>
+                        );
+                    })}
                 </div>
             )}
         </nav>
