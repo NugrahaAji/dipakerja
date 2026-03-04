@@ -1,10 +1,12 @@
+"use client";
+
 import { ShieldCheck } from "lucide-react";
 
 export default function HeroSection() {
   return (
     <section className="bg-gradient-to-br from-slate-50 via-white to-teal-50 py-20">
       <div className="w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-        
+
         {/* Text */}
         <div>
           <h2 className="text-4xl md:text-5xl font-semibold text-slate-800 leading-tight tracking-tight">
@@ -12,7 +14,7 @@ export default function HeroSection() {
           </h2>
 
           <p className="mt-6 text-lg text-slate-600 max-w-lg">
-            Sistem pelaporan pemeriksaan kesehatan kerja perusahaan secara 
+            Sistem pelaporan pemeriksaan kesehatan kerja perusahaan secara
             terintegrasi, transparan, dan profesional setiap tahunnya.
           </p>
 
@@ -22,7 +24,7 @@ export default function HeroSection() {
             </button>
 
             <button className="border border-slate-300 hover:border-teal-600 text-slate-400 hover:text-teal-600 px-6 py-3 rounded-xl text-sm font-medium transition">
-              Pelajari Regulasi 
+              Pelajari Regulasi
             </button>
           </div>
         </div>

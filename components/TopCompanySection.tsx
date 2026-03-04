@@ -1,3 +1,5 @@
+"use client";
+
 import CompanyTable from "@/components/CompanyTable";
 import Image from "next/image";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import Navbar from "@/components/Navbar";
 import HeroSore from "@/components/HeroSore";
 import RatingSection from "@/components/RatingSection";

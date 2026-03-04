@@ -1,3 +1,5 @@
+"use client";
+
 export default function LegalSection() {
     const laws = [
         "Undang-Undang No. 13 Tahun 2003 tentang Ketenagakerjaan.",

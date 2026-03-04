@@ -39,7 +39,7 @@ export default function PilihanPelaporan({
 }: PilihanPelaporanProps) {
     return (
         <section className="py-4">
-            <div className="bg-white rounded-xl shadow-md p-6 space-y-5">
+            <div className="bg-white rounded-xl p-6 space-y-5">
                 {/* Header */}
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-[#e8f4f3] flex items-center justify-center">

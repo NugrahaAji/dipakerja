@@ -13,68 +13,26 @@ import {
     Plus,
 } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 
-// ─── SVG Illustration ────────────────────────────────────────────────────────
-
-function HealthIllustration() {
-    return (
-        <div className="flex items-center justify-center gap-4 flex-shrink-0">
-            {/* Clipboard */}
-            <div className="relative">
-                <div className="w-20 h-24 md:w-28 md:h-32 bg-white rounded-2xl shadow-lg border border-blue-100 flex flex-col items-center justify-center p-3 rotate-[-4deg]">
-                    <div className="w-8 h-2 bg-amber-400 rounded-full mb-3" />
-                    <div className="w-full space-y-1.5">
-                        {[1, 2, 3, 4].map((i) => (
-                            <div key={i} className="flex items-center gap-1.5">
-                                <div className="w-3 h-3 rounded-sm border-2 border-teal-400 flex items-center justify-center flex-shrink-0">
-                                    <div className="w-1.5 h-1.5 bg-teal-400 rounded-sm" />
-                                </div>
-                                <div className="h-1.5 bg-gray-200 rounded-full flex-1" />
-                            </div>
-                        ))}
-                    </div>
-                    <ClipboardList className="absolute -top-3 -right-3 w-6 h-6 text-teal-500" />
-                </div>
-            </div>
-
-            {/* Stethoscope circle */}
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-teal-500 rounded-full shadow-lg flex items-center justify-center rotate-[6deg]">
-                <Stethoscope className="w-8 h-8 md:w-10 md:h-10 text-white" />
-            </div>
-
-            {/* Shield medical */}
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-blue-600 rounded-2xl shadow-lg flex items-center justify-center rotate-[-2deg]">
-                <ShieldCheck className="w-10 h-10 md:w-12 md:h-12 text-white" />
-            </div>
-        </div>
-    );
-}
-
-// ─── Hero Section ─────────────────────────────────────────────────────────────
 
 function HeroSection() {
     return (
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8 border border-blue-200">
-            {/* Left */}
-            <div className="flex-1 min-w-0">
-                <span className="inline-block bg-teal-100 text-teal-700 text-xs font-semibold px-3 py-1 rounded-full mb-4 tracking-wide">
-                    ADEK3 — Medical Check-Up
-                </span>
-                <h1 className="text-2xl md:text-3xl font-bold text-gray-800 leading-snug mb-3">
-                    Pelaporan Hasil MCU Tahunan
-                </h1>
-                <p className="text-gray-500 text-sm md:text-base leading-relaxed max-w-md">
-                    Laporan Pemeriksaan Kesehatan Kerja untuk setiap perusahaan setiap
-                    tahunnya. Pantau status kesehatan tenaga kerja secara terpusat dan
-                    terstruktur.
-                </p>
+                <section className="py-16 max-w-6xl mx-auto px-6 bg-transparent z-10">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                {/* Left */}
+                <div>
+                    <h1 className="text-3xl md:text-4xl font-medium text-[#2C3E50] leading-[1.2] mb-4 ">
+                        Pelaporan Hasil MCU Tahunan
+                    </h1>
+                    <p className="text-[#6B7280] text-base leading-relaxed max-w-md">
+                        Laporan Pemeriksaan Kesehatan Kerja untuk setiap perusahaan setiap
+                        tahunnya. Pantau status kesehatan tenaga kerja secara terpusat dan
+                        terstruktur.
+                    </p>
+                </div>
             </div>
-
-            {/* Right – Illustration */}
-            <div className="flex-shrink-0">
-                <HealthIllustration />
-            </div>
-        </div>
+        </section>
     );
 }
 
@@ -101,9 +59,8 @@ function DasarHukumSection() {
     ];
 
     return (
-        <div className="bg-gray-100 rounded-2xl border border-gray-200 p-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-                <h2 className="text-xl font-bold text-gray-800 mb-6">
+            <div className="bg-white rounded-xl shadow-sm  p-8 max-w-6xl m-auto mb-8">
+                <h2 className="text-2xl font-medium text-gray-800 mb-6">
                     Dasar Hukum Kewajiban MCU Tahunan
                 </h2>
                 <ol className="space-y-5">
@@ -117,7 +74,6 @@ function DasarHukumSection() {
                     ))}
                 </ol>
             </div>
-        </div>
     );
 }
 
@@ -131,7 +87,7 @@ function StatusBadge({ status }: { status: string }) {
     };
     const cls = colorMap[status] ?? "bg-gray-100 text-gray-600";
     return (
-        <span className={`${cls} rounded-full px-3 py-1 text-xs font-semibold`}>
+        <span className={`${cls} rounded-full px-3 py-1 text-xs font-medium`}>
             {status}
         </span>
     );
@@ -173,12 +129,11 @@ function McuTableSection({
     });
 
     return (
-        <div className="bg-gray-100 rounded-2xl border border-gray-200 p-6">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-5">
+            <div className="bg-white rounded-xl shadow-sm p-8 space-y-5 max-w-6xl mx-auto mb-12">
                 {/* ── Header ── */}
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                     <div className="flex-1 min-w-0">
-                        <h2 className="text-xl font-bold text-gray-800">{title}</h2>
+                        <h2 className="text-2xl font-medium text-gray-800">{title}</h2>
                         <p className="text-gray-500 text-sm mt-1 leading-relaxed">
                             {description}
                         </p>
@@ -186,7 +141,7 @@ function McuTableSection({
                     {showAddButton && (
                         <button
                             id="btn-tambah-laporan"
-                            className="flex items-center gap-2 bg-teal-600 text-white rounded-full px-5 py-2 text-sm font-semibold hover:bg-teal-700 active:scale-95 transition-all duration-200 flex-shrink-0 shadow-sm"
+                            className="flex items-center gap-2 bg-teal-600 text-white rounded-full px-5 py-2 text-sm font-medium hover:bg-teal-700 active:scale-95 transition-all duration-200 flex-shrink-0 shadow-sm"
                         >
                             <Plus className="w-4 h-4" />
                             Tambah Laporan Baru
@@ -237,19 +192,19 @@ function McuTableSection({
                     <table className="w-full text-sm">
                         <thead>
                             <tr className="bg-gray-50 border-b border-gray-100">
-                                <th className="text-left font-semibold text-gray-500 px-4 py-3 w-12">
+                                <th className="text-left font-medium text-gray-500 px-4 py-3 w-12">
                                     No
                                 </th>
-                                <th className="text-left font-semibold text-gray-500 px-4 py-3">
+                                <th className="text-left font-medium text-gray-500 px-4 py-3">
                                     Nama Perusahaan
                                 </th>
-                                <th className="text-left font-semibold text-gray-500 px-4 py-3">
+                                <th className="text-left font-medium text-gray-500 px-4 py-3">
                                     Tahun Laporan
                                 </th>
-                                <th className="text-left font-semibold text-gray-500 px-4 py-3">
+                                <th className="text-left font-medium text-gray-500 px-4 py-3">
                                     Status
                                 </th>
-                                <th className="text-left font-semibold text-gray-500 px-4 py-3">
+                                <th className="text-left font-medium text-gray-500 px-4 py-3">
                                     Aksi
                                 </th>
                             </tr>
@@ -279,7 +234,7 @@ function McuTableSection({
                                             <StatusBadge status={row.status} />
                                         </td>
                                         <td className="px-4 py-3">
-                                            <button className="flex items-center gap-2 bg-teal-600 text-white rounded-full px-4 py-1.5 text-xs font-semibold hover:bg-teal-700 active:scale-95 transition-all duration-200 shadow-sm">
+                                            <button className="flex items-center gap-2 bg-teal-600 text-white rounded-full px-4 py-1.5 text-xs font-medium hover:bg-teal-700 active:scale-95 transition-all duration-200 shadow-sm">
                                                 Detail
                                                 <Download className="w-3.5 h-3.5" />
                                             </button>
@@ -324,7 +279,7 @@ function McuTableSection({
                             <button className="w-7 h-7 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center hover:border-teal-400 hover:bg-teal-50 transition text-gray-500">
                                 <ChevronLeft className="w-4 h-4" />
                             </button>
-                            <button className="w-7 h-7 rounded-lg bg-teal-600 text-white text-xs font-semibold flex items-center justify-center shadow-sm">
+                            <button className="w-7 h-7 rounded-lg bg-teal-600 text-white text-xs font-medium flex items-center justify-center shadow-sm">
                                 1
                             </button>
                             <button className="w-7 h-7 rounded-lg border border-gray-200 bg-gray-50 flex items-center justify-center hover:border-teal-400 hover:bg-teal-50 transition text-gray-500">
@@ -334,7 +289,6 @@ function McuTableSection({
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 
@@ -353,9 +307,17 @@ export default function Adek3Page() {
         <div className="min-h-screen bg-gray-50">
             <Navbar />
 
-            <main className="max-w-7xl mx-auto px-6 py-10 space-y-10">
-                {/* Section 1 — Hero */}
-                <HeroSection />
+            <main className="mx-auto space-y-10">
+                <div className="flex flex-row md:flex-col items-center bg-[#e8efed] relative">
+                    <HeroSection />
+                    <Image
+                        src="/adek3Hero.png"
+                        alt="SORE Illustration"
+                        width={400}
+                        height={300}
+                        className="h-full w-auto object-cover absolute bottom-0 right-0 pointer-events-none opacity-30 md:opacity-100"
+                    />
+                </div>
 
                 {/* Section 2 — Dasar Hukum */}
                 <DasarHukumSection />
@@ -368,13 +330,6 @@ export default function Adek3Page() {
                     showAddButton={true}
                 />
 
-                {/* Section 4 — Tabel Laporan Perusahaan */}
-                <McuTableSection
-                    title="Pelaporan Hasil MCU Tahunan"
-                    description="Perusahaan dapat melaporkan berdasarkan workplace atau perusahaan (setiap perusahaan)."
-                    data={tableData}
-                    showAddButton={false}
-                />
             </main>
         </div>
     );
