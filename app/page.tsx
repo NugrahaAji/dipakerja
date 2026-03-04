@@ -56,7 +56,7 @@ export default function PelaporanPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="min-h-screen bg-gradient-to-br from-[#f4f7f7] to-[#dce4e4]">
             <Navbar />
 
             {/* Main Content */}

@@ -56,16 +56,16 @@ export default function RatingSection() {
                 <h2 className="text-2xl font-medium text-[#2C3E50] mb-6">Berikan Penilaian Anda</h2>
 
                 {/* Search + Button */}
-                <div className="flex gap-3 mb-6">
-                    <div className="flex-1 flex items-center gap-2 border border-[#E5E7EB] rounded-xl px-4 py-3 bg-white focus-within:border-[#2F7E79] transition-colors duration-200">
+                <div className="flex gap-3 mb-6 w-full">
+                    <div className="flex-1 flex items-center gap-2 border border-[#E5E7EB] rounded-xl px-4 py-3 bg-white focus-within:border-[#2F7E79] transition-colors duration-200 min-w-0">
                         <Search className="w-4 h-4 text-[#6B7280] shrink-0" />
                         <input
                             type="text"
                             placeholder="Cari nama perusahaan..."
-                            className=" text-sm text-[#2C3E50] outline-none placeholder-[#6B7280] bg-transparent"
+                            className="w-full min-w-0 text-sm text-[#2C3E50] outline-none placeholder-[#6B7280] bg-transparent"
                         />
                     </div>
-                    <button className="bg-[#2F7E79] text-white text-sm font-medium px-6 py-3 rounded-xl hover:opacity-90 transition-opacity duration-200 whitespace-nowrap">
+                    <button className="shrink-0 bg-[#2F7E79] text-white text-sm font-medium px-6 py-3 rounded-xl hover:opacity-90 transition-opacity duration-200 whitespace-nowrap">
                         Berikan Nilai
                     </button>
                 </div>
@@ -101,7 +101,7 @@ export default function RatingSection() {
                     <em>Kerja (K3)</em>. Pilih nilai dari{" "}
                     <span className="text-[#2C3E50] font-medium">Sangat Baik</span> hingga{" "}
                     <span className="text-[#E76F51] font-medium">Sangat Buruk</span> dan klik{" "}
-                    <span className="text-[#2F7E79] font-semibold">Berikan Nilai</span>.
+                    <span className="text-[#2F7E79] font-semibold">Beri Nilai</span>.
                 </p>
             </div>
         </section>

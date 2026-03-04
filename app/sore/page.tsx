@@ -15,7 +15,7 @@ export default function Home() {
           alt="SORE Illustration"
           width={400}
           height={300}
-          className="h-full w-auto object-cover absolute bottom-0 right-0 pointer-events-none opacity-0 md:opacity-100"
+          className="h-full w-auto object-cover absolute bottom-0 right-0 pointer-events-none opacity-30 md:opacity-100"
         />
       </div>
         <RatingSection />

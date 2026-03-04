@@ -2,6 +2,7 @@
 
 import { Star, ChevronLeft, ChevronRight, ChevronRight as ArrowRight, Users } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Company {
     no: number;
@@ -158,47 +159,14 @@ export default function CompanyTable() {
             </div>
 
             {/* Footer */}
-            <div className="px-6 py-4 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p className="text-xs text-[#6B7280]">
-                    Menampilkan 1 – 10 dari 5.872 perusahaan
-                </p>
+            <div className="px-6 py-4 border-t border-[#E5E7EB] flex flex-col sm:flex-row items-center justify-end gap-4">
 
-                <div className="flex items-center gap-2">
-                    {/* Pagination */}
-                    <div className="flex items-center gap-1">
-                        <button
-                            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E5E7EB] text-[#6B7280] hover:border-[#2F7E79] hover:text-[#2F7E79] transition-colors duration-150 disabled:opacity-40"
-                            disabled={currentPage === 1}
-                        >
-                            <ChevronLeft className="w-4 h-4" />
-                        </button>
-
-                        {[1, 2, 3].map((page) => (
-                            <button
-                                key={page}
-                                onClick={() => setCurrentPage(page)}
-                                className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium border transition-colors duration-150 ${currentPage === page
-                                        ? "bg-[#2F7E79] text-white border-[#2F7E79]"
-                                        : "border-[#E5E7EB] text-[#6B7280] hover:border-[#2F7E79] hover:text-[#2F7E79]"
-                                    }`}
-                            >
-                                {page}
-                            </button>
-                        ))}
-
-                        <button
-                            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                            className="w-8 h-8 flex items-center justify-center rounded-lg border border-[#E5E7EB] text-[#6B7280] hover:border-[#2F7E79] hover:text-[#2F7E79] transition-colors duration-150 disabled:opacity-40"
-                            disabled={currentPage === totalPages}
-                        >
-                            <ChevronRight className="w-4 h-4" />
-                        </button>
-                    </div>
-
+                <div className="flex items-center  gap-2">
                     {/* Lihat Semua */}
-                    <button className="flex items-center gap-1.5 bg-[#2F7E79] text-white text-sm font-semibold px-5 py-2 rounded-full hover:opacity-90 transition-opacity duration-200 ml-2">
-                        Lihat Semua
+                    <button className="flex items-center gap-1.5 bg-[#2F7E79] text-white text-sm font-medium px-5 py-2 rounded-full hover:opacity-90 transition-opacity duration-200 ml-2">
+                        <Link href="#">
+                            Lihat Semua
+                        </Link>
                         <ArrowRight className="w-4 h-4" />
                     </button>
                 </div>
