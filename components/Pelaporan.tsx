@@ -3,7 +3,7 @@ import { ShieldCheck } from "lucide-react";
 export default function HeroSection() {
   return (
     <section className="bg-gradient-to-br from-slate-50 via-white to-teal-50 py-20">
-      <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div className="w-8xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
         
         {/* Text */}
         <div>

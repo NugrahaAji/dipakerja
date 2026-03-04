@@ -7,11 +7,9 @@ export default function LegalSection() {
     ];
 
     return (
-        <section className="py-0">
-            <div className="max-w-6xl mx-auto px-6">
-
+        <section className="py-10">
+            <div className="max-w-8xl mx-auto px-6">
                 <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-10">
-
                     <h3 className="text-2xl font-semibold text-slate-800 mb-10">
                         Dasar Hukum Kewajiban MCU Tahunan
                     </h3>

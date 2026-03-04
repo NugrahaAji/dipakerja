@@ -40,7 +40,7 @@ export default function ReportTable() {
     };
 
     return (
-        <section className="max-w-6xl mx-auto px-6 pb-20">
+        <section className="py-10 max-w-8xl mx-auto px-6 pb-20">
             <div className="bg-white rounded-3xl shadow-md border border-slate-100 p-8">
 
                 {/* Header */}
@@ -56,7 +56,7 @@ export default function ReportTable() {
                     <input
                         type="text"
                         placeholder="Cari nama perusahaan..."
-                        className="w-full pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
+                        className="w-full text-black pl-12 pr-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none text-sm"
                         value={search}
                         onChange={(e) => handleSearch(e.target.value)}
                     />
@@ -77,10 +77,7 @@ export default function ReportTable() {
 
                         <tbody>
                             {currentData.map((report, index) => (
-                                <tr
-                                    key={report.id}
-                                    className="border-t hover:bg-slate-50 transition"
-                                >
+                                <tr key={report.id} className="border-t hover:bg-slate-50 transition">
                                     <td className="p-4 text-center font-medium text-slate-700 w-fit">
                                         {startIndex + index + 1}
                                     </td>
@@ -97,15 +94,16 @@ export default function ReportTable() {
                                                 : report.status === "Ditolak"
                                                     ? "bg-red-100 text-red-600"
                                                     : "bg-yellow-100 text-yellow-600"
-                                                }`}
-                                        >
+                                                }`}>
                                             {report.status}
                                         </span>
                                     </td>
-                                    <td className="p-4 flex item-center justify-center w-full">
-                                        <button className="flex items-center gap-2 text-teal-600 hover:text-teal-700 transition">
-                                            <Eye size={16} /> Detail
-                                        </button>
+                                    <td className="p-4 text-center">
+                                        <div className="flex justify-center">
+                                            <button className="flex items-center gap-2 text-teal-600 hover:text-teal-700 transition">
+                                                <Eye size={16} /> Detail
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             ))}
@@ -176,8 +174,8 @@ export default function ReportTable() {
                             <button
                                 onClick={() => goToPage(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-1 transition
-          ${currentPage === 1
+                                className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-1 transition 
+                                    ${currentPage === 1
                                         ? "text-slate-400 border-slate-200 cursor-not-allowed"
                                         : "text-slate-700 border-slate-300 hover:bg-slate-50"
                                     }`}
@@ -197,11 +195,10 @@ export default function ReportTable() {
                                             key={page}
                                             onClick={() => goToPage(page)}
                                             className={`px-3 py-2 rounded-lg text-sm border transition
-                ${currentPage === page
+                                                ${currentPage === page
                                                     ? "bg-teal-600 text-white border-teal-600 shadow-sm"
                                                     : "border-slate-300 text-slate-700 hover:bg-slate-50"
-                                                }`}
-                                        >
+                                                }`}>
                                             {page}
                                         </button>
                                     ))}
@@ -212,11 +209,10 @@ export default function ReportTable() {
                                 onClick={() => goToPage(currentPage + 1)}
                                 disabled={currentPage === totalPages}
                                 className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-1 transition
-          ${currentPage === totalPages
+                                    ${currentPage === totalPages
                                         ? "text-slate-400 border-slate-200 cursor-not-allowed"
                                         : "text-slate-700 border-slate-300 hover:bg-slate-50"
-                                    }`}
-                            >
+                                    }`}>
                                 <ChevronRight size={16} />
                             </button>
 
