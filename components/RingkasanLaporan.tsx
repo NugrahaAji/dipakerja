@@ -21,13 +21,13 @@ export default function RingkasanLaporan({
 }: RingkasanLaporanProps) {
     return (
         <section className="py-6">
-            <div className="bg-white rounded-xl shadow-md p-8 space-y-6">
+            <div className="bg-white rounded-xl p-8 space-y-6">
                 {/* Success Animation */}
                 <div className="flex flex-col items-center justify-center py-6 space-y-4">
                     <div className="w-20 h-20 rounded-full bg-emerald-50 flex items-center justify-center animate-bounce-once">
                         <CheckCircle2 className="w-12 h-12 text-[#3b827e]" strokeWidth={1.5} />
                     </div>
-                    <h2 className="text-2xl font-bold text-slate-800 text-center">Laporan Terkirim!</h2>
+                    <h2 className="text-2xl font-medium text-slate-800 text-center">Laporan Terkirim!</h2>
                     <p className="text-slate-500 text-sm text-center max-w-md leading-relaxed">
                         Terima kasih telah berkontribusi dalam sistem pelaporan keselamatan kerja nasional.
                     </p>
@@ -36,7 +36,7 @@ export default function RingkasanLaporan({
                 {/* Summary Table */}
                 <div className="border border-slate-200 rounded-xl overflow-hidden">
                     <div className="bg-slate-50 px-5 py-3 border-b border-slate-200">
-                        <h3 className="text-sm font-bold text-slate-700 uppercase tracking-wide">
+                        <h3 className="text-sm font-semibold text-slate-700 uppercase tracking-wide">
                             Ringkasan Laporan
                         </h3>
                     </div>
@@ -72,7 +72,7 @@ export default function RingkasanLaporan({
                     <button
                         id="btn-laporan-baru"
                         onClick={onReset}
-                        className="bg-[#3b827e] hover:bg-[#2f6e6a] text-white font-semibold px-8 py-2.5 rounded-full transition-all duration-200 text-sm"
+                        className="bg-[#3b827e] hover:bg-[#2f6e6a] text-white font-medium px-8 py-2.5 rounded-full transition-all duration-200 text-sm"
                     >
                         Buat Laporan Baru
                     </button>

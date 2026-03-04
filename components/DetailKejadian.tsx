@@ -61,7 +61,7 @@ export default function DetailKejadian({
         <section className="py-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* LEFT COLUMN */}
-                <div className="bg-white rounded-xl shadow-md p-6 space-y-5">
+                <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
                     {/* Role */}
                     <div className="space-y-2">
                         <p className="text-sm font-semibold text-slate-700">
@@ -87,7 +87,7 @@ export default function DetailKejadian({
                     {/* Identitas Korban – only when Pelapor */}
                     {form.role === "Pelapor" && (
                         <div className="space-y-4">
-                            <h3 className="text-base font-bold text-slate-800">Identitas Korban</h3>
+                            <h3 className="text-base font-semibold text-slate-800">Identitas Korban</h3>
 
                             <input
                                 id="victim-nama"
@@ -172,8 +172,8 @@ export default function DetailKejadian({
                 </div>
 
                 {/* RIGHT COLUMN */}
-                <div className="bg-white rounded-xl shadow-md p-6 space-y-5">
-                    <h3 className="text-base font-bold text-slate-800">Informasi Kejadian</h3>
+                <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-5">
+                    <h3 className="text-base font-semibold text-slate-800">Informasi Kejadian</h3>
 
                     {/* Tanggal */}
                     <div className="flex items-center gap-3">
@@ -285,14 +285,14 @@ export default function DetailKejadian({
                         <button
                             id="btn-kembali"
                             onClick={onBack}
-                            className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded-full transition-all duration-200 text-sm"
+                            className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium px-5 py-2.5 rounded-full transition-all duration-200 text-sm"
                         >
                             Kembali
                         </button>
                         <button
                             id="btn-kirim"
                             onClick={onSubmit}
-                            className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-200 text-sm"
+                            className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] text-white font-medium px-6 py-2.5 rounded-full transition-all duration-200 text-sm"
                         >
                             Kirim Laporan
                             <ChevronRight className="w-4 h-4" />

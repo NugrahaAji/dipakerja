@@ -34,8 +34,8 @@ export default function DataPelapor({ form, onChange, onNext, onBack }: DataPela
 
     return (
         <section className="py-4">
-            <div className="bg-white rounded-xl shadow-md p-6 space-y-5">
-                <h2 className="text-xl font-bold text-slate-800">Data Pelapor / Korban</h2>
+            <div className="bg-white rounded-xl p-6 space-y-5">
+                <h2 className="text-2xl font-medium text-slate-800">Data Pelapor / Korban</h2>
 
                 <div className="border-t border-slate-200 pt-4 space-y-5">
                     <h3 className="text-base font-semibold text-slate-700">
@@ -130,7 +130,7 @@ export default function DataPelapor({ form, onChange, onNext, onBack }: DataPela
                             <button
                                 type="button"
                                 onClick={onBack}
-                                className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded-full transition-all duration-200 text-sm"
+                                className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-medium px-5 py-2.5 rounded-full transition-all duration-200 text-sm"
                             >
                                 Kembali
                             </button>
@@ -138,7 +138,7 @@ export default function DataPelapor({ form, onChange, onNext, onBack }: DataPela
                             <button
                                 type="button"
                                 onClick={onNext}
-                                className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-full transition-all duration-200 text-sm"
+                                className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium px-8 py-2.5 rounded-full transition-all duration-200 text-sm"
                             >
                                 Lanjut
                             </button>
