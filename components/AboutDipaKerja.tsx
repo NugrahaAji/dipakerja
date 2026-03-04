@@ -62,7 +62,7 @@ export default function AboutDipaKerja() {
                         Visi Kami
                     </h2>
                     <p className="text-sm text-[#6B7280] leading-relaxed italic">
-                        "Menjadi pionir transformasi digital K3 di Indonesia yang mewujudkan ekosistem kerja proaktif, aman, tangguh, dan transparan."
+                        &quot; Menjadi pionir transformasi digital K3 di Indonesia yang mewujudkan ekosistem kerja proaktif, aman, tangguh, dan transparan.&quot;
                     </p>
                 </div>
 

@@ -22,7 +22,7 @@ export default function ReportTable() {
         return reports.filter((r) =>
             r.company.toLowerCase().includes(search.toLowerCase())
         );
-    }, [search]);
+    }, [search, reports]);
 
     // Pagination logic
     const totalPages = Math.ceil(filtered.length / itemsPerPage);
@@ -174,7 +174,7 @@ export default function ReportTable() {
                             <button
                                 onClick={() => goToPage(currentPage - 1)}
                                 disabled={currentPage === 1}
-                                className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-1 transition 
+                                className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-1 transition
                                     ${currentPage === 1
                                         ? "text-slate-400 border-slate-200 cursor-not-allowed"
                                         : "text-slate-700 border-slate-300 hover:bg-slate-50"

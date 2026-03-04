@@ -1,7 +1,5 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
-
 export interface ReporterForm {
     nama: string;
     gender: "Laki-laki" | "Perempuan";

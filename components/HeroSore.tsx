@@ -1,5 +1,4 @@
-import { HardHat, ClipboardList, ShieldCheck } from "lucide-react";
-import Image from "next/image";
+"use client";
 export default function HeroSore() {
     return (
         <section className="py-16 max-w-6xl mx-auto px-6 bg-transparent z-10">

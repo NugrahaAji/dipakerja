@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, ChevronLeft, ChevronRight, ChevronRight as ArrowRight, Users } from "lucide-react";
+import { Star, ChevronRight, ChevronRight as ArrowRight, Users } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -70,8 +70,6 @@ const rankMedal = (no: number) => {
 };
 
 export default function CompanyTable() {
-    const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = 3;
 
     return (
         <div>

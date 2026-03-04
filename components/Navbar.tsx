@@ -1,8 +1,8 @@
 "use client";
 
-import { Shield } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
@@ -20,7 +20,7 @@ export default function Navbar() {
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <img src="/uness.png" alt="" className="w-12 h-12" />
+                    <Image src="/uness.png" alt="" height={48} width={48}/>
                     <span className="font-semibold text-xl text-[#2C3E50] tracking-wide">
                         DIPAKERJA
                     </span>

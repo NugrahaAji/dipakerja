@@ -7,9 +7,6 @@ import {
     Download,
     ChevronLeft,
     ChevronRight,
-    ClipboardList,
-    Stethoscope,
-    ShieldCheck,
     Plus,
 } from "lucide-react";
 import { useState } from "react";
