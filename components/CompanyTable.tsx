@@ -133,7 +133,7 @@ export default function CompanyTable() {
 
                                 {/* Safety Score Badge */}
                                 <td className="px-4 py-4">
-                                    <span className="inline-flex items-center gap-1.5 bg-[#2E9F87] text-white text-sm font-bold px-4 py-1.5 rounded-full">
+                                    <span className="inline-flex items-center gap-1.5 bg-[#2E9F87] text-white text-sm font-medium px-4 py-1.5 rounded-full">
                                         <Star className="w-3.5 h-3.5 fill-white text-white" />
                                         {company.score.toFixed(2)}
                                     </span>

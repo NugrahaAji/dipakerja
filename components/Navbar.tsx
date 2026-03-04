@@ -6,9 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navLinks = [
-    { label: "Beranda", href: "/pelaporan" },
+    { label: "Beranda", href: "/" },
     { label: "ADEK3", href: "/adek3" },
-    { label: "SORE", href: "/" },
+    { label: "SORE", href: "/sore" },
 ];
 
 export default function Navbar() {
@@ -16,15 +16,13 @@ export default function Navbar() {
     const pathname = usePathname();
 
     return (
-        <nav className="bg-white shadow-sm sticky top-0 z-50">
-            <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+        <nav className="bg-white/70 backdrop-blur-md shadow-sm sticky top-0 z-50">
+            <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-[#2F7E79] flex items-center justify-center">
-                        <Shield className="w-4 h-4 text-white" />
-                    </div>
-                    <span className="font-bold text-base text-[#2C3E50] tracking-wide">
-                        DIPA KERJA
+                    <img src="/uness.png" alt="" className="w-12 h-12" />
+                    <span className="font-semibold text-xl text-[#2C3E50] tracking-wide">
+                        DIPAKERJA
                     </span>
                 </Link>
 
@@ -38,7 +36,7 @@ export default function Navbar() {
                                 href={link.href}
                                 className={`text-sm font-medium px-4 py-1.5 rounded-full transition-all duration-200
                                     ${isActive
-                                        ? "text-[#2F7E79] bg-[#e8f4f3] font-semibold"
+                                        ? "text-[#2F7E79] bg-[#f0faf9] font-medium border border-[#2F7E79]/20"
                                         : "text-[#4B5563] hover:text-[#2F7E79] hover:bg-slate-50"
                                     }`}
                             >
@@ -68,7 +66,7 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {menuOpen && (
-                <div className="md:hidden border-t border-[#E5E7EB] bg-white px-6 py-4 flex flex-col gap-2">
+                <div className="md:hidden border-t border-[#E5E7EB] px-6 py-4 flex flex-col gap-2 relative">
                     {navLinks.map((link) => {
                         const isActive = pathname === link.href;
                         return (

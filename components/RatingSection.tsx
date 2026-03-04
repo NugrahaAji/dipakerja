@@ -29,6 +29,14 @@ const ratingOptions = [
         emoji: null,
     },
     {
+        id: "buruk",
+        stars: 1,
+        label: "Buruk",
+        color: "text-[#E76F51]",
+        starColor: "text-[#E76F51] fill-[#E76F51]",
+        emoji: null,
+    },
+    {
         id: "sangat-buruk",
         stars: 2,
         label: "Sangat Buruk",
@@ -42,10 +50,10 @@ export default function RatingSection() {
     const [selected, setSelected] = useState<string | null>(null);
 
     return (
-        <section className="py-8">
-            <div className="bg-white rounded-2xl shadow-lg p-8">
+        <section className="py-8 max-w-6xl mx-auto px-6">
+            <div className="bg-white rounded-2xl shadow-md p-8">
                 {/* Title */}
-                <h2 className="text-xl font-bold text-[#2C3E50] mb-6">Berikan Penilaian Anda</h2>
+                <h2 className="text-2xl font-medium text-[#2C3E50] mb-6">Berikan Penilaian Anda</h2>
 
                 {/* Search + Button */}
                 <div className="flex gap-3 mb-6">
@@ -54,14 +62,10 @@ export default function RatingSection() {
                         <input
                             type="text"
                             placeholder="Cari nama perusahaan..."
-                            className="flex-1 text-sm text-[#2C3E50] outline-none placeholder-[#6B7280] bg-transparent"
+                            className=" text-sm text-[#2C3E50] outline-none placeholder-[#6B7280] bg-transparent"
                         />
-                        {/* Down arrow */}
-                        <svg className="w-4 h-4 text-[#6B7280] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
                     </div>
-                    <button className="bg-[#2F7E79] text-white text-sm font-semibold px-6 py-3 rounded-xl hover:opacity-90 transition-opacity duration-200 whitespace-nowrap">
+                    <button className="bg-[#2F7E79] text-white text-sm font-medium px-6 py-3 rounded-xl hover:opacity-90 transition-opacity duration-200 whitespace-nowrap">
                         Berikan Nilai
                     </button>
                 </div>
@@ -92,7 +96,7 @@ export default function RatingSection() {
                 </div>
 
                 {/* Description */}
-                <p className="text-xs text-[#6B7280] leading-relaxed">
+                <p className="text-sm w-[80%] text-[#6B7280] leading-relaxed">
                     Beri nilai perusahaan terkait pelaksanaan Keselamatan dan Kesehatan{" "}
                     <em>Kerja (K3)</em>. Pilih nilai dari{" "}
                     <span className="text-[#2C3E50] font-medium">Sangat Baik</span> hingga{" "}

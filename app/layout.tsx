@@ -10,9 +10,10 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "SORE – Safety Score Public",
+  title: "DIPAKERJA",
   description:
     "Evaluasi Keselamatan Kerja Perusahaan di Seluruh Indonesia. Berikan penilaian untuk perusahaan terkait K3 di sekitar Anda.",
+  icons: "/uness.png",
 };
 
 export default function RootLayout({
