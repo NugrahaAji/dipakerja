@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ShieldPlus } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import AboutDipaKerja from "@/components/AboutDipaKerja";
 import PilihanPelaporan from "@/components/PilihanPelaporan";
@@ -10,7 +9,7 @@ import DetailKejadian, { KejadianForm, VictimForm } from "@/components/DetailKej
 import RingkasanLaporan from "@/components/RingkasanLaporan";
 
 type PilihanType = "perorangan" | "perusahaan";
-type StepType = "pilihan" | "pelapor" | "detail" | "ringkasan";
+type StepIndex = 0 | 1 | 2 | 3;
 
 const defaultVictim: VictimForm = {
     nama: "",
@@ -43,13 +42,15 @@ const defaultKejadianForm: KejadianForm = {
 };
 
 export default function PelaporanPage() {
-    const [step, setStep] = useState<StepType>("pilihan");
+    const [step, setStep] = useState<StepIndex>(0);
     const [pilihan, setPilihan] = useState<PilihanType | null>(null);
-    const [reporterForm, setReporterForm] = useState<ReporterForm>(defaultReporterForm);
-    const [kejadianForm, setKejadianForm] = useState<KejadianForm>(defaultKejadianForm);
+    const [reporterForm, setReporterForm] =
+        useState<ReporterForm>(defaultReporterForm);
+    const [kejadianForm, setKejadianForm] =
+        useState<KejadianForm>(defaultKejadianForm);
 
     const handleReset = () => {
-        setStep("pilihan");
+        setStep(0);
         setPilihan(null);
         setReporterForm(defaultReporterForm);
         setKejadianForm(defaultKejadianForm);
@@ -59,67 +60,79 @@ export default function PelaporanPage() {
         <div className="min-h-screen bg-slate-50">
             <Navbar />
 
-            {/* Main Content */}
-            <main className="max-w-6xl mx-auto px-6 pb-16">
-                {/* Section 1: About */}
+            <main className="max-w-6xl mx-auto px-6 py-12">
+
+                {/* About Section (Static) */}
                 <AboutDipaKerja />
 
-                {/* Section 2: Pilihan Pelaporan */}
-                <PilihanPelaporan
-                    selected={pilihan}
-                    onSelect={setPilihan}
-                    onNext={() => {
-                        if (pilihan) setStep("pelapor");
-                    }}
-                />
-
-                {/* Section 3: Data Pelapor — shown after step >= pelapor */}
-                {(step === "pelapor" || step === "detail" || step === "ringkasan") && (
-                    <div
-                        id="section-pelapor"
-                        className="transition-all duration-300 animate-fade-in"
-                    >
-                        <DataPelapor
-                            form={reporterForm}
-                            onChange={setReporterForm}
-                            onNext={() => setStep("detail")}
+                {/* Progress Indicator */}
+                <div className="flex items-center gap-2 mb-8 mt-10">
+                    {[0, 1, 2, 3].map((i) => (
+                        <div
+                            key={i}
+                            className={`flex-1 h-2 rounded-full transition-all duration-300 ${step >= i ? "bg-[#3b827e]" : "bg-slate-200"
+                                }`}
                         />
-                    </div>
-                )}
+                    ))}
+                </div>
 
-                {/* Section 4: Detail Kejadian — shown after step >= detail */}
-                {(step === "detail" || step === "ringkasan") && (
-                    <div
-                        id="section-detail"
-                        className="transition-all duration-300 animate-fade-in"
-                    >
-                        <DetailKejadian
-                            form={kejadianForm}
-                            onChange={setKejadianForm}
-                            onBack={() => setStep("pelapor")}
-                            onSubmit={() => setStep("ringkasan")}
-                        />
-                    </div>
-                )}
+                {/* WIZARD CONTAINER */}
+                <div className="relative overflow-hidden w-full">
 
-                {/* Section 5: Ringkasan — shown after submit */}
-                {step === "ringkasan" && (
                     <div
-                        id="section-ringkasan"
-                        className="transition-all duration-300 animate-fade-in"
+                        className="flex transition-transform duration-500 ease-in-out"
+                        style={{
+                            transform: `translateX(-${step * 100}%)`,
+                        }}
                     >
-                        <RingkasanLaporan
-                            tipePelaporan={
-                                pilihan === "perorangan" ? "Perorangan" : "Perusahaan"
-                            }
-                            namaPelapor={reporterForm.nama}
-                            jenisPengaduan={kejadianForm.jenisPengaduan}
-                            lokasiKejadian={kejadianForm.lokasi}
-                            k3Status={kejadianForm.k3Status}
-                            onReset={handleReset}
-                        />
+
+                        {/* STEP 1 */}
+                        <div className="min-w-full">
+                            <PilihanPelaporan
+                                selected={pilihan}
+                                onSelect={setPilihan}
+                                onNext={() => {
+                                    if (pilihan) setStep(1);
+                                }}
+                            />
+                        </div>
+
+                        {/* STEP 2 */}
+                        <div className="min-w-full">
+                            <DataPelapor
+                                form={reporterForm}
+                                onChange={setReporterForm}
+                                onNext={() => setStep(2)}
+                                onBack={() => setStep(0)}
+                            />
+                        </div>
+
+                        {/* STEP 3 */}
+                        <div className="min-w-full">
+                            <DetailKejadian
+                                form={kejadianForm}
+                                onChange={setKejadianForm}
+                                onBack={() => setStep(1)}
+                                onSubmit={() => setStep(3)}
+                            />
+                        </div>
+
+                        {/* STEP 4 */}
+                        <div className="min-w-full">
+                            <RingkasanLaporan
+                                tipePelaporan={
+                                    pilihan === "perorangan" ? "Perorangan" : "Perusahaan"
+                                }
+                                namaPelapor={reporterForm.nama}
+                                jenisPengaduan={kejadianForm.jenisPengaduan}
+                                lokasiKejadian={kejadianForm.lokasi}
+                                k3Status={kejadianForm.k3Status}
+                                onReset={handleReset}
+                            />
+                        </div>
+
                     </div>
-                )}
+                </div>
             </main>
         </div>
     );
