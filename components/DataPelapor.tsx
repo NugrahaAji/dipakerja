@@ -24,9 +24,10 @@ interface DataPelaporProps {
     form: ReporterForm;
     onChange: (form: ReporterForm) => void;
     onNext: () => void;
+    onBack: () => void;
 }
 
-export default function DataPelapor({ form, onChange, onNext }: DataPelaporProps) {
+export default function DataPelapor({ form, onChange, onNext, onBack }: DataPelaporProps) {
     const update = <K extends keyof ReporterForm>(key: K, value: ReporterForm[K]) => {
         onChange({ ...form, [key]: value });
     };
@@ -125,14 +126,23 @@ export default function DataPelapor({ form, onChange, onNext }: DataPelaporProps
                             </span>
                         </label>
 
-                        <button
-                            id="btn-next-pelapor"
-                            onClick={onNext}
-                            className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] text-white font-semibold px-6 py-2.5 rounded-full transition-all duration-200 text-sm whitespace-nowrap self-end md:self-auto"
-                        >
-                            Next
-                            <ChevronRight className="w-4 h-4" />
-                        </button>
+                        <div className="flex justify-between gap-5 mt-8">
+                            <button
+                                type="button"
+                                onClick={onBack}
+                                className="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-5 py-2.5 rounded-full transition-all duration-200 text-sm"
+                            >
+                                Kembali
+                            </button>
+
+                            <button
+                                type="button"
+                                onClick={onNext}
+                                className="flex items-center gap-2 bg-[#3b827e] hover:bg-[#2f6e6a] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold px-8 py-2.5 rounded-full transition-all duration-200 text-sm"
+                            >
+                                Lanjut
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
