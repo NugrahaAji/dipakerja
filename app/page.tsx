@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import AboutDipaKerja from "@/components/AboutDipaKerja";
 import PilihanPelaporan from "@/components/PilihanPelaporan";
 import DataPelapor, { ReporterForm } from "@/components/DataPelapor";
+import DataPerusahaan, { PerusahaanForm } from "@/components/DataPerusahaan";
 import DetailKejadian, { KejadianForm, VictimForm } from "@/components/DetailKejadian";
 import RingkasanLaporan from "@/components/RingkasanLaporan";
 
@@ -29,6 +32,14 @@ const defaultReporterForm: ReporterForm = {
     consent: true,
 };
 
+const defaultPerusahaanForm: PerusahaanForm = {
+    namaPerusahaan: "",
+    email: "",
+    telepon: "",
+    alamat: "",
+    consent: true,
+};
+
 const defaultKejadianForm: KejadianForm = {
     role: "Pelapor",
     victim: defaultVictim,
@@ -41,23 +52,203 @@ const defaultKejadianForm: KejadianForm = {
     keterangan: "",
 };
 
-export default function PelaporanPage() {
+const slideVariants = {
+    enter: (direction: number) => ({
+        opacity: 0,
+        x: direction > 0 ? 40 : -40,
+    }),
+    center: {
+        opacity: 1,
+        x: 0,
+    },
+    exit: (direction: number) => ({
+        opacity: 0,
+        x: direction > 0 ? -40 : 40,
+    }),
+};
+
+// Inner component that uses useSearchParams (must be inside Suspense)
+function PelaporanSlider() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
     const [step, setStep] = useState<StepIndex>(0);
+    const [direction, setDirection] = useState<number>(1);
     const [pilihan, setPilihan] = useState<PilihanType | null>(null);
-    const [reporterForm, setReporterForm] =
-        useState<ReporterForm>(defaultReporterForm);
-    const [kejadianForm, setKejadianForm] =
-        useState<KejadianForm>(defaultKejadianForm);
+    const [reporterForm, setReporterForm] = useState<ReporterForm>(defaultReporterForm);
+    const [perusahaanForm, setPerusahaanForm] = useState<PerusahaanForm>(defaultPerusahaanForm);
+    const [kejadianForm, setKejadianForm] = useState<KejadianForm>(defaultKejadianForm);
+
+    // Read query params on mount — restore step & type after company login redirect
+    useEffect(() => {
+        const stepParam = searchParams.get("step");
+        const typeParam = searchParams.get("type");
+
+        if (stepParam === "2" && typeParam === "perusahaan") {
+            setPilihan("perusahaan");
+            setDirection(1);
+            setStep(1); // step index 1 = "Data Pelapor/Perusahaan" (the 2nd step)
+            // Clean up URL without reloading
+            router.replace("/", { scroll: false });
+        }
+    }, [searchParams, router]);
+
+    const goToStep = (next: StepIndex) => {
+        setDirection(next > step ? 1 : -1);
+        setStep(next);
+    };
 
     const handleReset = () => {
+        setDirection(-1);
         setStep(0);
         setPilihan(null);
         setReporterForm(defaultReporterForm);
+        setPerusahaanForm(defaultPerusahaanForm);
         setKejadianForm(defaultKejadianForm);
     };
 
+    // Step 0 → Next handler: redirect to login page if perusahaan
+    const handleNextFromStep0 = () => {
+        if (!pilihan) return;
+        if (pilihan === "perusahaan") {
+            router.push("/login-perusahaan");
+        } else {
+            goToStep(1);
+        }
+    };
+
     return (
-        <div className="min-h-screen bg-slate-50">
+        <div className="bg-gray-50 py-10 -mx-6 px-6 mt-10">
+            <div className="max-w-5xl mx-auto">
+                <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+
+                    {/* Progress Bar */}
+                    <div className="flex items-center gap-2 mb-8">
+                        {[0, 1, 2, 3].map((i) => (
+                            <div
+                                key={i}
+                                className={`flex-1 h-2 rounded-full transition-all duration-300 ${step >= i ? "bg-[#3b827e]" : "bg-slate-200"
+                                    }`}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Slider Content */}
+                    <div className="overflow-hidden">
+                        <AnimatePresence mode="wait" custom={direction}>
+                            {step === 0 && (
+                                <motion.div
+                                    key="step-0"
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <PilihanPelaporan
+                                        selected={pilihan}
+                                        onSelect={setPilihan}
+                                        onNext={handleNextFromStep0}
+                                    />
+                                </motion.div>
+                            )}
+
+                            {step === 1 && pilihan === "perorangan" && (
+                                <motion.div
+                                    key="step-1-perorangan"
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <DataPelapor
+                                        form={reporterForm}
+                                        onChange={setReporterForm}
+                                        onNext={() => goToStep(2)}
+                                        onBack={() => goToStep(0)}
+                                    />
+                                </motion.div>
+                            )}
+
+                            {step === 1 && pilihan === "perusahaan" && (
+                                <motion.div
+                                    key="step-1-perusahaan"
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <DataPerusahaan
+                                        form={perusahaanForm}
+                                        onChange={setPerusahaanForm}
+                                        onNext={() => goToStep(2)}
+                                        onBack={() => goToStep(0)}
+                                    />
+                                </motion.div>
+                            )}
+
+                            {step === 2 && (
+                                <motion.div
+                                    key="step-2"
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <DetailKejadian
+                                        form={kejadianForm}
+                                        onChange={setKejadianForm}
+                                        onBack={() => goToStep(1)}
+                                        onSubmit={() => goToStep(3)}
+                                    />
+                                </motion.div>
+                            )}
+
+                            {step === 3 && (
+                                <motion.div
+                                    key="step-3"
+                                    custom={direction}
+                                    variants={slideVariants}
+                                    initial="enter"
+                                    animate="center"
+                                    exit="exit"
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <RingkasanLaporan
+                                        tipePelaporan={
+                                            pilihan === "perorangan" ? "Perorangan" : "Perusahaan"
+                                        }
+                                        namaPelapor={
+                                            pilihan === "perusahaan"
+                                                ? perusahaanForm.namaPerusahaan
+                                                : reporterForm.nama
+                                        }
+                                        jenisPengaduan={kejadianForm.jenisPengaduan}
+                                        lokasiKejadian={kejadianForm.lokasi}
+                                        k3Status={kejadianForm.k3Status}
+                                        onReset={handleReset}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default function PelaporanPage() {
+    return (
+        <div className="bg-slate-50">
             <Navbar />
 
             <main className="max-w-6xl mx-auto px-6 py-12">
@@ -65,74 +256,11 @@ export default function PelaporanPage() {
                 {/* About Section (Static) */}
                 <AboutDipaKerja />
 
-                {/* Progress Indicator */}
-                <div className="flex items-center gap-2 mb-8 mt-10">
-                    {[0, 1, 2, 3].map((i) => (
-                        <div
-                            key={i}
-                            className={`flex-1 h-2 rounded-full transition-all duration-300 ${step >= i ? "bg-[#3b827e]" : "bg-slate-200"
-                                }`}
-                        />
-                    ))}
-                </div>
+                {/* === SLIDER SECTION === */}
+                <Suspense fallback={null}>
+                    <PelaporanSlider />
+                </Suspense>
 
-                {/* WIZARD CONTAINER */}
-                <div className="relative overflow-hidden w-full">
-
-                    <div
-                        className="flex transition-transform duration-500 ease-in-out"
-                        style={{
-                            transform: `translateX(-${step * 100}%)`,
-                        }}
-                    >
-
-                        {/* STEP 1 */}
-                        <div className="min-w-full">
-                            <PilihanPelaporan
-                                selected={pilihan}
-                                onSelect={setPilihan}
-                                onNext={() => {
-                                    if (pilihan) setStep(1);
-                                }}
-                            />
-                        </div>
-
-                        {/* STEP 2 */}
-                        <div className="min-w-full">
-                            <DataPelapor
-                                form={reporterForm}
-                                onChange={setReporterForm}
-                                onNext={() => setStep(2)}
-                                onBack={() => setStep(0)}
-                            />
-                        </div>
-
-                        {/* STEP 3 */}
-                        <div className="min-w-full">
-                            <DetailKejadian
-                                form={kejadianForm}
-                                onChange={setKejadianForm}
-                                onBack={() => setStep(1)}
-                                onSubmit={() => setStep(3)}
-                            />
-                        </div>
-
-                        {/* STEP 4 */}
-                        <div className="min-w-full">
-                            <RingkasanLaporan
-                                tipePelaporan={
-                                    pilihan === "perorangan" ? "Perorangan" : "Perusahaan"
-                                }
-                                namaPelapor={reporterForm.nama}
-                                jenisPengaduan={kejadianForm.jenisPengaduan}
-                                lokasiKejadian={kejadianForm.lokasi}
-                                k3Status={kejadianForm.k3Status}
-                                onReset={handleReset}
-                            />
-                        </div>
-
-                    </div>
-                </div>
             </main>
         </div>
     );
